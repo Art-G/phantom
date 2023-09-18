@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Header } from "./components/header";
 import { List } from "./components/list";
@@ -18,7 +18,7 @@ const initialState = {
 };
 
 const filters = [
-  { name: "all", key: "" },
+  { name: "All", key: "" },
   { name: "LinkedIn", key: "linkedin" },
   { name: "Mail", key: "mail" },
   { name: "Workflow", key: "workflow" },
@@ -26,8 +26,14 @@ const filters = [
 ];
 
 export default function Home() {
-  const [filter, setFilter] = useState("");
   const [state, setState] = useState(initialState);
+  const [category, setCategory] = useState('');
+
+  // Need useEffect here so the window element is only called client side
+  useEffect(() => {
+    const queryParameters = new URLSearchParams(window.location.search);
+    setCategory(queryParameters.get("category") || '');
+  }, [])
 
   const contextValue = { state, setState };
 
@@ -43,9 +49,10 @@ export default function Home() {
                 <li
                   key={solution.key}
                   className="text-sm mb-2 cursor-pointer"
-                  onClick={() => setFilter(solution.key)}
                 >
+                  <a href={solution.key === '' ? '/' : `/?category=${solution.key}`}>
                   {solution.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -53,7 +60,7 @@ export default function Home() {
           <div className="flex flex-col max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
             <MyContext.Provider value={contextValue}>
               <Search />
-              <List filter={filter} />
+              <List filter={category} />
             </MyContext.Provider>
           </div>
         </div>
