@@ -1,4 +1,4 @@
-export type IPhantoms = {
+export type IPhantom = {
     id: string
     name: string
     script: string
@@ -36,4 +36,6 @@ export type IPhantoms = {
                     | "4 times per working hour, excluding weekends"
               )
     }
-}[]
+};
+
+export type IPhantoms = IPhantom[]
