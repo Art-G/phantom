@@ -4,7 +4,7 @@ import { Fragment, FunctionComponent, useContext } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import { IPhantom } from "../types/phantoms";
-import { MyContext } from "../page";
+import { MyContext } from "../contexts/stateContext";
 
 function classNames(...classes: String[]) {
   return classes.filter(Boolean).join(" ");

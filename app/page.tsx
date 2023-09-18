@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { useState } from "react";
 
 import { Header } from "./components/header";
 import { List } from "./components/list";
@@ -9,21 +9,13 @@ import { Search } from "./components/search";
 import { IPhantoms } from "./types/phantoms";
 
 import data from "./data/phantoms.json";
+import { MyContext } from "./contexts/stateContext";
 
 const phantoms = data as IPhantoms;
 
-interface PhantomState {
-  phantoms: IPhantoms;
-}
-
-export const initialState = {
+const initialState = {
   phantoms: phantoms,
 };
-
-export const MyContext = createContext({
-  state: initialState as PhantomState,
-  setState: {} as Dispatch<SetStateAction<PhantomState>>,
-});
 
 const filters = [
   { name: "all", key: "" },

@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext } from "react";
 import { Item } from "./item";
-import { MyContext } from "../page";
+import { MyContext } from "../contexts/stateContext";
 
 interface ListProps {
   filter: string;
